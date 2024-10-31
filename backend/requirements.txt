@@ -4,7 +4,7 @@ uvicorn
 starlette
 pydantic
 # chatgpt library
-openai
+# openai
 # sqlalchemy db orm
 sqlalchemy
 # .envから環境変数読み込み
