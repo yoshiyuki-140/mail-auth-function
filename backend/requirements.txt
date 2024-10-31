@@ -1,0 +1,16 @@
+# fastapi & dependencis
+fastapi
+uvicorn
+starlette
+pydantic
+# chatgpt library
+openai
+# sqlalchemy db orm
+sqlalchemy
+# .envから環境変数読み込み
+python-dotenv
+# poregresql library
+psycopg2-binary
+# formatter
+isort
+black
