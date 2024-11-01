@@ -32,3 +32,6 @@ dbattach:
 
 backendattach:
 	docker compose logs -f backend
+
+isort:
+	isort .
