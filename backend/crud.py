@@ -57,7 +57,7 @@ def update_user(
     try:
         db.execute(q, params)
         db.commit()
-        return name,password
+        return name, password
     except SQLAlchemyError as e:
         db.rollback()
         print("Error occured:", e)
