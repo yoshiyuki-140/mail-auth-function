@@ -3,9 +3,10 @@ from pydantic import BaseModel, EmailStr
 
 
 class UserInformation(BaseModel):
-    """
-    呼び出し時
-    - ユーザー作成時
+    """ユーザー情報の定義
+
+    Args:
+        BaseModel (_type_): _description_
     """
 
     name: str
@@ -14,6 +15,12 @@ class UserInformation(BaseModel):
 
 
 class ReadUserInfo(BaseModel):
+    """ユーザー情報をAPIで呼ぶときのデータ構造
+
+    Args:
+        BaseModel (_type_): _description_
+    """
+
     name: str
     email: EmailStr
     password: str
