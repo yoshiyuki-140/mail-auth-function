@@ -25,3 +25,6 @@ up:
 f:
 	isort .	
 	black .
+
+test:
+	pytest
