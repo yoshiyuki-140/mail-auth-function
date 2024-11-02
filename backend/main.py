@@ -23,11 +23,8 @@ app = FastAPI()
 # オリジン間リソース共有の設定
 
 origins = [
-    # "http://localhost.tiangolo.com",
-    # "https://localhost.tiangolo.com",
     # "http://localhost",
-    # "http://localhost:8080",
-    # "http://192.168.3.2",
+    # "http://localhost:8000",
 ]
 
 app.add_middleware(
@@ -59,6 +56,15 @@ def create_user(
 # READ
 @app.get("/user/{user_id}", response_model=schemas.UserInformation)
 def get_user(user_id: int, db: Session = Depends(get_db)):
+    """ユーザー情報をDBに登録するためのエントリポイント
+
+    Args:
+        user_id (int): _description_
+        db (Session, optional): _description_. Defaults to Depends(get_db).
+
+    Returns:
+        _type_: _description_
+    """
     name, email, password = crud.read_user(db, user_id)
     return {"name": name, "email": email, "password": password}
 
@@ -70,6 +76,16 @@ def put_user(
     body: schemas.UserInformation,
     db: Session = Depends(get_db),
 ):
+    """ユーザー情報を更新するためのエントリポイント
+
+    Args:
+        user_id (int): _description_
+        body (schemas.UserInformation): _description_
+        db (Session, optional): _description_. Defaults to Depends(get_db).
+
+    Returns:
+        _type_: _description_
+    """
     name, email, password = crud.update_user(
         user_id,
         body.name,
@@ -83,5 +99,14 @@ def put_user(
 # DELETE
 @app.delete("/user/{user_id}")
 def delete_user(user_id: int, db: Session = Depends(get_db)):
+    """ユーザーを削除するためのエントリポイント
+
+    Args:
+        user_id (int): _description_
+        db (Session, optional): _description_. Defaults to Depends(get_db).
+
+    Returns:
+        _type_: _description_
+    """
     crud.delete_user(db, user_id)
     return {"StatusMessage": "Success Delete Params"}
