@@ -22,4 +22,6 @@ dockerbuild:
 up:
 	docker run --publish 8000:8000 --name auth-backend --rm auth-backend
 
-	
+f:
+	isort .	
+	black .
