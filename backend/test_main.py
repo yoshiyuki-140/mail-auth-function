@@ -69,6 +69,7 @@ def client(db):
 
 
 def test_create_user(client):
+    """create_user関数のテスト"""
     response = client.post(
         "/user",
         json={"name": "string", "email": "test@example.com", "password": "string"},
@@ -78,6 +79,7 @@ def test_create_user(client):
 
 
 def test_get_user(client):
+    """get_user関数のテスト"""
     response = client.get("/user/1")
     assert response.status_code == 200
     assert response.json() == {
@@ -93,3 +95,28 @@ def test_get_user(client):
         "email": "user2@example.com",
         "password": "string2",
     }
+
+
+def test_put_user(client):
+    """put_user関数のテスト"""
+    response = client.put(
+        "/user/1",
+        json={
+            "name": "modified_test1",
+            "email": "modified_user1@example.com",
+            "password": "modified_string1",
+        },
+    )
+    assert response.status_code == 200
+    assert response.json() == {
+        "name": "modified_test1",
+        "email": "modified_user1@example.com",
+        "password": "modified_string1",
+    }
+
+
+def test_delete_user(client):
+    """delete_user関数のテスト"""
+    response = client.delete("/user/1")
+    assert response.status_code == 200
+    assert response.json() == {"StatusMessage": "Success Delete Params"}
