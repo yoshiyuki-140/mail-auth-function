@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 def create_user(db: Session, name: str, email: str, password: str):
     """ユーザー作成を行う関数"""
     q = text(
-        "insert into users (name,email,password) values (:name, :email, :password))"
+        "insert into users (name,email,password) values (:name, :email, :password)"
     )
     params = {
         "name": name,
@@ -65,7 +65,7 @@ def update_user(
     try:
         db.execute(q, params)
         db.commit()
-        return name, password
+        return name, email, password
     except SQLAlchemyError as e:
         db.rollback()
         print("Error occured:", e)
