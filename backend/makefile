@@ -1,10 +1,9 @@
-.PHONY: up ac dac
-# include ../.env
+.PHONY: run ac dac up f test
 
 # サーバー立ち上げ
 run:
 	# uvicorn main:app --reload
-	uvicorn main:app --reload --host 0.0.0.0 --port 8000
+	uvicorn main:app --reload --host localhost --port 8000
 
 # 仮想環境有効化
 ac:
@@ -16,7 +15,7 @@ dac:
 
 # docker コンテナ ビルド
 dockerbuild:
-	docker build -t -auth-backend .
+	docker build -t auth-backend .
 
 # dockerコンテナ立ち上げテスト(単体)
 up:
