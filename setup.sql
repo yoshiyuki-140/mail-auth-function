@@ -12,4 +12,3 @@ CREATE TABLE users (
 
 -- テストコードのためのDB
 CREATE DATABASE test_db;
-;
