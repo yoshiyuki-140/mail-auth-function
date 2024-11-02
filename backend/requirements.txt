@@ -4,11 +4,9 @@ uvicorn
 starlette
 pydantic
 pydantic[email] # for email validation
-# chatgpt library
-# openai
 # sqlalchemy db orm
 sqlalchemy
-# .envから環境変数読み込み
+# `.env`ファイルから環境変数を読み込むためのライブラリ
 python-dotenv
 # poregresql library
 psycopg2-binary
