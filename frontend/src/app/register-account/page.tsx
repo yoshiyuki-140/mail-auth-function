@@ -1,5 +1,4 @@
 import Link from "next/link";
-
 export default function Home() {
   return (
     <div className="flex items-center justify-center h-screen w-screen bg-white">
@@ -11,10 +10,10 @@ export default function Home() {
         </div>
         <div className="flex justify-center mt-40">
           <Link
-            href="./register-account"
+            href="."
             className="text-black border bg-red-500 px-8 py-2 shadow-lg rounded-3xl hover:bg-red-400"
           >
-            登録
+            登録1
           </Link>
         </div>
       </div>
