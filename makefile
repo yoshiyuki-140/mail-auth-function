@@ -14,8 +14,8 @@ network_clean:
 
 # PostgreSQLデータベースコンテナ関連
 dbinit:
-	sudo chown 999 -R data
-	sudo chgrp 999 -R data
+	sudo chown kuro -R data
+	sudo chgrp kuro -R data
 	# sudo chmod 775 -R data
 
 init:
@@ -23,6 +23,9 @@ init:
 
 login:
 	psql -U postgres -d postgres -h localhost -p 5432
+
+login-test-db:
+	psql -U postgres -d test_db -h localhost -p 5432
 
 dbattach:
 	docker compose logs -f db

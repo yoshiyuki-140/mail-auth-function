@@ -9,3 +9,7 @@ CREATE TABLE users (
     email VARCHAR(255),
     password VARCHAR(255)
 );
+
+-- テストコードのためのDB
+CREATE DATABASE test_db;
+;
