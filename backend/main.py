@@ -12,7 +12,7 @@ from sqlalchemy.orm import Session
 
 import crud
 import schemas
-from database import SessionLocal, engine
+from database import SessionLocal, engine, get_db
 
 load_dotenv()  # .envから環境変数に読み出し
 
@@ -37,15 +37,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-
-# Dependency
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 
 # test entry posint
