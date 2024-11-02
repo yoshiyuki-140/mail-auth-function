@@ -3,6 +3,7 @@ fastapi
 uvicorn
 starlette
 pydantic
+pydantic[email] # for email validation
 # chatgpt library
 # openai
 # sqlalchemy db orm

@@ -60,15 +60,15 @@ def create_user(
     db: Session = Depends(get_db),
 ):
     # ユーザー作成
-    crud.create_user(db, body.name, body.password)
+    crud.create_user(db, body.name, body.email, body.password)
     return {"Success": "user was created"}
 
 
 # READ
 @app.get("/user/{user_id}", response_model=schemas.UserInformation)
 def get_user(user_id: int, db: Session = Depends(get_db)):
-    name, password = crud.read_user(db, user_id)
-    return {"name": name, "password": password}
+    name, email, password = crud.read_user(db, user_id)
+    return {"name": name, "email": email, "password": password}
 
 
 # UPDATE
@@ -78,13 +78,14 @@ def put_user(
     body: schemas.UserInformation,
     db: Session = Depends(get_db),
 ):
-    name, password = crud.update_user(
+    name, email, password = crud.update_user(
         user_id,
         body.name,
+        body.email,
         body.password,
         db,
     )
-    return {"name": name, "password": password}
+    return {"name": name, "email": email, "password": password}
 
 
 # DELETE

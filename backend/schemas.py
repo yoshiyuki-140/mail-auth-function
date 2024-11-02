@@ -1,5 +1,5 @@
 # from typing import List, Optional
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 
 
 class UserInformation(BaseModel):
@@ -9,8 +9,11 @@ class UserInformation(BaseModel):
     """
 
     name: str
+    email: EmailStr
     password: str
 
 
 class ReadUserInfo(BaseModel):
+    name: str
+    email: EmailStr
     password: str

@@ -4,11 +4,14 @@ from sqlalchemy.orm import Session
 
 
 # CREATE
-def create_user(db: Session, name: str, password: str):
+def create_user(db: Session, name: str, email: str, password: str):
     """ユーザー作成を行う関数"""
-    q = text("insert into users (name,password) values (:name, :password))")
+    q = text(
+        "insert into users (name,email,password) values (:name, :email, :password))"
+    )
     params = {
         "name": name,
+        "email": email,
         "password": password,
     }
     try:
@@ -23,15 +26,16 @@ def create_user(db: Session, name: str, password: str):
 
 # READ
 def read_user(db: Session, user_id: int):
-    q = text("select name,password from users where id = :id")
+    q = text("select name,email,password from users where id = :id")
     params = {"id": user_id}
     try:
         result = db.execute(q, params)
         row = result.fetchone()
         if row:  # rowが存在すればネスト内を実行
             name = row[0]
-            password = row[1]
-            return name, password
+            email = row[1]
+            password = row[2]
+            return name, email, password
         else:
             print("Error : Can't Read Db Error occurred!")
             return None
@@ -45,12 +49,16 @@ def read_user(db: Session, user_id: int):
 def update_user(
     user_id: int,
     name: str,
+    email: str,
     password: str,
     db: Session,
 ):
-    q = text("update users set name = :name, password = :password where id = :user_id")
+    q = text(
+        "update users set name = :name, password = :password, email = :email where id = :user_id"
+    )
     params = {
         "name": name,
+        "email": email,
         "password": password,
         "user_id": user_id,
     }
