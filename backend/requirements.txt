@@ -15,3 +15,5 @@ psycopg2-binary
 # formatter
 isort
 black
+# テスト用
+pytest
