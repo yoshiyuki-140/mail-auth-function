@@ -13,16 +13,13 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-db_user = os.getenv("POSTGRES_USER")
-db_pass = os.getenv("POSTGRES_PASSWORD")
-db_name = os.getenv("POSTGRES_DB", "test_db")
-
-print("This is db user name", db_user)
-print("This is db user pass", db_pass)
+db_user = os.getenv("POSTGRES_USER")  # postgreSQLのユーザー名
+db_pass = os.getenv("POSTGRES_PASSWORD")  # postgreSQLのパスワード
+db_name = os.getenv("POSTGRES_DB", "test_db")  # postgreSQLのテストコード動作時のDB名
 
 if not db_user or not db_pass:
     print(
-        "警告: データベースユーザーまたはパスワードが見つかりません。'.env' ファイルを確認してください。"
+        "Warning: データベースユーザーまたはパスワードが見つかりません。'.env' ファイルを確認してください。"
     )
 
 # PostgreSQL用のテストデータベースURL
