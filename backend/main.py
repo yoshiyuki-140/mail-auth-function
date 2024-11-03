@@ -132,7 +132,7 @@ def add_temporary_user_info(
 
 
 # トークン情報を認証して一時保存テーブルからユーザー情報保存テーブルに情報を保存するエントリポイント
-@app.post("/temporary_user/")
+@app.post("/temporary_user/token_auth")
 def auth_temporary_user(
     body: schemas.AuthTemporaryUserInformation, db: Session = Depends(get_db)
 ):
