@@ -120,6 +120,9 @@ def delete_user(db: Session, user_id: int):
         return None
 
 
+#################### temporary_usersテーブルに関する操作 ####################
+
+
 # ユーザー情報を一時保存テーブルに保存する
 def create_temporary_user(db: Session, name: str, email: str, password: str):
     """ユーザー作成を行う関数"""
