@@ -4,11 +4,38 @@
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="Qj4bK5fstt2w8Lq27mKN-1" value="Actor" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+        <mxCell id="Qj4bK5fstt2w8Lq27mKN-1" value="Actor" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
           <mxGeometry x="130" y="220" width="30" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="Qj4bK5fstt2w8Lq27mKN-2" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="190" y="220" width="120" height="60" as="geometry" />
+        <mxCell id="Qj4bK5fstt2w8Lq27mKN-2" value="ユーザー情報を登録する" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="200" y="220" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Uh2r626zLnskWE77n2Bd-1" value="一時保存テーブルにユーザー情報を保存する" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="380" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Uh2r626zLnskWE77n2Bd-2" value="メールでトークンを確認する" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="380" y="220" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Uh2r626zLnskWE77n2Bd-3" value="トークンを発行する" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="340" y="380" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Uh2r626zLnskWE77n2Bd-4" value="メールで認証トークンを送信する" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="380" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Uh2r626zLnskWE77n2Bd-5" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="500" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Uh2r626zLnskWE77n2Bd-6" value="トークンをトークン入力画面に入力する" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="520" y="220" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Uh2r626zLnskWE77n2Bd-7" value="認証が行われ、サービス開始" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="660" y="220" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Uh2r626zLnskWE77n2Bd-8" value="一時保存テーブルにはユーザー情報にトークンを含めたテーブルを作成する。" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="85" y="320" width="120" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="Uh2r626zLnskWE77n2Bd-9" value="トークンを受け取って、そのトークンから一時保存テーブルから登録済みユーザーのDBテーブルに保存するコードを書かないといけない。" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="85" y="480" width="135" height="140" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
