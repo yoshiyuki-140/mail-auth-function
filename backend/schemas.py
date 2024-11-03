@@ -24,3 +24,26 @@ class ReadUserInfo(BaseModel):
     name: str
     email: EmailStr
     password: str
+
+
+class TemporaryUserInformation(BaseModel):
+    """ユーザー情報一時保存のためのスキーマ
+
+    Args:
+        BaseModel (_type_): _description_
+    """
+
+    name: str
+    email: EmailStr
+    password: str
+
+
+class AuthTemporaryUserInformation(BaseModel):
+    """メールに送信したトークンで認証を行うときのリクエストボディー
+
+    Args:
+        BaseModel (_type_): _description_
+    """
+
+    email: EmailStr
+    token: int
