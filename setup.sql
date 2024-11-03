@@ -16,7 +16,7 @@ CREATE TABLE temporary_users (
     name VARCHAR(255),
     email VARCHAR(255),
     password VARCHAR(255),
-    token CHAR(6) NOT NULL,
+    token CHAR(6) NOT NULL
 );
 
 -- テストコードのためのDB
