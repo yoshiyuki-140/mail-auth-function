@@ -11,7 +11,7 @@ CREATE TABLE users (
 );
 
 -- ユーザー情報を認証トークンとともに一時的に保存するテーブルを作成する。
-CREATE TABLE users (
+CREATE TABLE temporary_users (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255),
     email VARCHAR(255),
