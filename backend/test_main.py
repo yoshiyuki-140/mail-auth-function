@@ -16,7 +16,10 @@ load_dotenv()
 
 db_user = os.getenv("POSTGRES_USER")  # postgreSQLのユーザー名
 db_pass = os.getenv("POSTGRES_PASSWORD")  # postgreSQLのパスワード
-db_name = os.getenv("POSTGRES_DB", "test_db")  # postgreSQLのテストコード動作時のDB名
+db_name = os.getenv(
+    "POSTGRES_DEV_DB", "test_db"
+)  # postgreSQLのテストコード動作時のDB名
+# db_name = os.getenv("POSTGRES_DB")
 
 if not db_user or not db_pass:
     print(
@@ -73,7 +76,7 @@ def test_create_user(client):
         json={"name": "string", "email": "test@example.com", "password": "string"},
     )
     assert response.status_code == 200
-    assert response.json() == {"Success": "user was created"}
+    assert response.json() == {"code": "0", "Message": "Success"}
 
 
 def test_get_user(client):

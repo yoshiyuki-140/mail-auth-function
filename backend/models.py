@@ -28,7 +28,7 @@ class TemporaryUser(Base):
         Base (_type_): _description_
     """
 
-    __tablename__ = "users"
+    __tablename__ = "temporary_users"
 
     id = Column(Integer, primary_key=True, index=True)
 
