@@ -1,7 +1,7 @@
 from sqlalchemy import text
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
-from token import create_token
+from common_function import create_token
 
 
 # CREATE
@@ -167,8 +167,9 @@ def auth_temporary_user_by_token(db: Session, email: str, token: int):
     try:
         result = db.execute(q, params)  # クエリ実行
         row = result.fetchone()  # クエリ実行結果から一行取得する
+        print(row)
         if row:
-            acquired_token = row[0]
+            acquired_token = int(row[0])
             id = row[1]
             name = row[2]
             password = row[3]
@@ -177,7 +178,7 @@ def auth_temporary_user_by_token(db: Session, email: str, token: int):
                 ## ユーザーをusersに作る
                 if create_user(db, name, email, password):
                     ## temporary_usersテーブルからuserデータを削除する
-                    if delete_temporary_user(user_id=id):
+                    if delete_temporary_user(db, user_id=id):
                         return True
                     else:
                         print(
@@ -209,7 +210,7 @@ def delete_temporary_user(db: Session, user_id: int):
     Returns:
         _type_: _description_
     """
-    q = "delete from temporary_users where id = :id"
+    q = text("delete from temporary_users where id = :id")
     params = {"id": user_id}
     try:
         result = db.execute(q, params)

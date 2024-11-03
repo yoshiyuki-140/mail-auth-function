@@ -121,7 +121,7 @@ def delete_user(user_id: int, db: Session = Depends(get_db)):
 def add_temporary_user_info(
     body: schemas.TemporaryUserInformation, db: Session = Depends(get_db)
 ):
-    """ユーザー情報一時保存テーブルに新しいユーザー情報とトークンを作成する
+    """temporary_usersテーブルに新しいユーザー情報とトークンを作成する
 
     Args:
         body (schemas.TemporaryUserInformation): _description_
@@ -136,7 +136,8 @@ def add_temporary_user_info(
 def auth_temporary_user(
     body: schemas.AuthTemporaryUserInformation, db: Session = Depends(get_db)
 ):
-    """リクエストボディーからトークンを取得し、一時保存テーブルと同じなら本ユーザーテーブルにユーザー情報を登録し、サインアップを完了するためのエントリポイント
+    """リクエストボディーからトークンを取得し、temporary_usersテーブルに登録されたユーザーと同じなら
+    usersテーブルにユーザー情報を登録し、サインアップを完了するためのエントリポイント
 
     Args:
         body (schemas.AuthTemporaryUserInformation): _description_
