@@ -22,6 +22,7 @@ up:
 	docker run --publish 8000:8000 --name auth-backend --rm auth-backend
 
 f:
+	autoflake --remove-all-unused-imports -r --in-place .
 	isort .	
 	black .
 
