@@ -2,13 +2,15 @@ import os
 
 import pytest
 from dotenv import load_dotenv
+from fastapi import Depends
 from fastapi.testclient import TestClient
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
+from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import sessionmaker
 
 from database import Base, get_db
 from main import app
-from models import User
+from models import TemporaryUser, User
 
 ############### テスト用のダミーデータを作成 ###############
 
@@ -19,7 +21,7 @@ db_pass = os.getenv("POSTGRES_PASSWORD")  # postgreSQLのパスワード
 db_name = os.getenv(
     "POSTGRES_DEV_DB", "test_db"
 )  # postgreSQLのテストコード動作時のDB名
-# db_name = os.getenv("POSTGRES_DB")
+db_name = "test_db"
 
 if not db_user or not db_pass:
     print(
@@ -44,6 +46,8 @@ def db():
     try:
         db.add_all(
             [
+                # User(id=1, name="test1", email="user1@example.com", password="string1"),
+                # User(id=2, name="test2", email="user2@example.com", password="string2"),
                 User(name="test1", email="user1@example.com", password="string1"),
                 User(name="test2", email="user2@example.com", password="string2"),
             ]
@@ -121,3 +125,45 @@ def test_delete_user(client):
     response = client.delete("/user/1")
     assert response.status_code == 200
     assert response.json() == {"StatusMessage": "Success Delete Params"}
+
+
+############### temporary_usersテーブルのためのテスト ###############
+
+
+# @pytest.mark.skip(reason="調査のためスキップ")
+def test_add_temporary_user_info(client):
+    """temporary_usersテーブルに新しいユーザー情報とトークンを生成する
+
+    Args:
+        client (_type_): _description_
+    """
+    request_body = {"name": "string", "email": "user@example.com", "password": "string"}
+
+    response = client.post("/temporary_user/", json=request_body)
+
+    # DBからデータを取得
+    db = TestingSessionLocal()
+    user_id = 1
+    q = text("select name,email,password from temporary_users where id = :id")
+    params = {"id": user_id}
+    try:
+        result = db.execute(q, params)
+        row = result.fetchone()
+        if row:
+            print("DEBUG : row is exist")
+            name, email, password = row  # 取得したデータを変数に代入
+        else:
+            print("Error: User not found in database")
+            assert False, "User data not found in database."
+    except SQLAlchemyError as e:
+        print("Error:", e)
+    finally:
+        db.close()
+
+    # 検証
+    ## check status code
+    assert response.status_code == 200
+    ## Is response body
+    assert response.json() == {"Success": "temporary user was stored"}
+    ## DBにきちんとデータが作られたか否かを調べる
+    assert request_body == {"name": name, "email": email, "password": password}
