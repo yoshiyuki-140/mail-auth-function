@@ -1,10 +1,11 @@
 'use client';
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation";
 
 interface RequestTokenInfo {
-    token: string,
+    email: string | null,
+    token: string | null,
 }
 
 interface ResponseBody {
@@ -34,10 +35,19 @@ const postTokenInfo = async (url: string, data: RequestTokenInfo): Promise<Respo
 
 export default function Home() {
     const router = useRouter();
+
+    const [email, setEmail] = useState<string | null>(null);
     const [formData, setFormData] = useState({
         token: '',
     });
 
+
+    // 初回レンダリング時にメールアドレスをセッションストレージから取得する
+    useEffect(() => {
+        // セッションストレージからemailを取得
+        const savedEmail = sessionStorage.getItem("email");
+        setEmail(savedEmail);
+    }, []);
 
 
     // フォームの入力欄が変更されたときの処理
@@ -57,6 +67,7 @@ export default function Home() {
         // START
         const url = 'http://localhost:8000/temporary_user/token_auth'; // 送信先のエントリポイントを指定
         const data: RequestTokenInfo = {
+            email: email,
             token: formData.token,
         };
         try {
