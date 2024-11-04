@@ -199,8 +199,8 @@ def test_auth_temporary_user(client):
     response = client.post("/temporary_user/token_auth/", json=request_body)
 
     # temporary_usersテーブルから当該ユーザー情報が削除されたことを確認する
-    q = text("select name,email,password from temporary_users where id = :id")
-    params = {"id": 1}
+    q = text("select * from temporary_users where email = :email")
+    params = {"email": request_body["email"]}
     try:
         result = db.execute(q, params)
         count_of_rows = len(result.fetchall())
