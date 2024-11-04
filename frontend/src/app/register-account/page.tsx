@@ -72,6 +72,7 @@ export default function Home() {
 
     try {
       const response = await postUserInfo(url, data);
+      sessionStorage.setItem("email",formData.email);
       router.push("/input-token");
       console.log("Success:", response);
     } catch (error) {
