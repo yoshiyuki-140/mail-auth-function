@@ -23,8 +23,9 @@ def send_token_via_email(token: int, email: str):
     to_email = email  # 送信先メールアドレス
 
     subject = "認証トークン"  # 主題
-    with open("./email_message.txt") as f:
-        body = f"""{f.read()}{token}"""  # メール本文
+    file_path = os.path.join(os.path.dirname(__file__), "email_message.txt")
+    with open(file_path) as f:
+        body = f"""{f.read()}\n{token}"""  # メール本文
 
     msg = message.EmailMessage()
     msg.set_content(body)
