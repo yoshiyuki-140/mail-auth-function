@@ -1,12 +1,18 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
+from dotenv import load_dotenv
+import os
+
+load_dotenv
 
 dialect = "postgresql"
 driver = "psycopg2"
-username = "postgres"
-password = "psql"
+username = os.getenv("POSTGRES_USER", "postgres")
+password = os.getenv("POSTGRES_PASSWORD", "psql")
 host = "localhost"
 port = "5432"
+database = os.getenv("POSTGRES_DB", "postgres")
+
 database = "postgres"
 url = f"{dialect}+{driver}://{username}:{password}@{host}:{port}/{database}"
 
