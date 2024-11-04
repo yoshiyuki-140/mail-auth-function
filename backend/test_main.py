@@ -2,7 +2,6 @@ import os
 
 import pytest
 from dotenv import load_dotenv
-from fastapi import Depends
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine, text
 from sqlalchemy.exc import SQLAlchemyError
@@ -10,7 +9,7 @@ from sqlalchemy.orm import sessionmaker
 
 from database import Base, get_db
 from main import app
-from models import TemporaryUser, User
+from models import User
 
 ############### テスト用のダミーデータを作成 ###############
 

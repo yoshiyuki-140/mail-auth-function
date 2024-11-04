@@ -1,18 +1,13 @@
 # api routing
-import json
-import os
-from os.path import dirname, join
 
-import uvicorn
 from dotenv import load_dotenv
-from fastapi import Body, Depends, FastAPI, Path
+from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 
 import crud
 import schemas
-from database import SessionLocal, engine, get_db
+from database import get_db
 
 load_dotenv()  # .envから環境変数に読み出し
 
