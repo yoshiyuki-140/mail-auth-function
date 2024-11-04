@@ -214,7 +214,7 @@ def test_auth_temporary_user(client):
 
     # usersテーブルに情報が登録されたことを確認する
     q = text("select * from users where email = :email")
-    params = {"id": 3}
+    params = {"email": request_body["email"]}
     try:
         result = db.execute(q, params)
         count_of_rows = len(result.fetchall())
