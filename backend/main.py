@@ -58,7 +58,7 @@ def create_user(
 # READ
 @app.get("/user/{user_id}", response_model=schemas.UserInformation)
 def get_user(user_id: int, db: Session = Depends(get_db)):
-    """ユーザー情報をDBに登録するためのエントリポイント
+    """ユーザー情報をDBから取得する関数
 
     Args:
         user_id (int): _description_
