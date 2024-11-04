@@ -33,14 +33,18 @@ services:
         ipv4_address: 192.168.100.4
 
   # フロントエンド : frontend
-  # frontend:
-  #   build: ./frontend
-  #   container_name: frontend
-  #   ports:
-  #     - "8080:8080"
-  #   depends_on:
-  #     - db
-  #     - auth-backend
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+      - auth-backend
+    
+    networks:
+      - default:
+        ipv4_address: 192.168.100.5
 
   # リバースプロキシ
   nginx:
