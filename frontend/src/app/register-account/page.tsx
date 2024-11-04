@@ -77,11 +77,7 @@ export default function Home() {
     } catch (error) {
       console.log("Request failed:", error);
     };
-    console.log(formData); // データ送信の処理（API経由など）
     // END
-
-    // 画面遷移処理
-
   };
 
 
