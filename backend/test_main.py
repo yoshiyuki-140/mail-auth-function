@@ -180,10 +180,12 @@ def test_auth_temporary_user(client):
 
     # セッション情報を登録
     db = TestingSessionLocal()
+    # リクエストボディー定義
+    request_body = {"email": "user@example.com", "token": 999999}
 
     # これから登録するデータが、まだusersテーブルに登録されていないことを確認する.
-    q = text("select name,email,password from users where id = :id")
-    params = {"id": 1}
+    q = text("select * from users where email = :email")
+    params = {"email": request_body["email"]}
 
     try:
         result = db.execute(q, params)
@@ -195,7 +197,6 @@ def test_auth_temporary_user(client):
         db.close()
 
     # 当該エントリポイントにリクエスト実行
-    request_body = {"email": "user@example.com", "token": 999999}
     response = client.post("/temporary_user/token_auth/", json=request_body)
 
     # temporary_usersテーブルから当該ユーザー情報が削除されたことを確認する
