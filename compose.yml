@@ -10,6 +10,9 @@ services:
       # - ./script:/docker-entrypoint-initdb.d
     env_file:
       - ./.env
+    networks:
+      default:
+        ipv4_address: 192.168.100.3
 
   # backend
   backend:
@@ -18,11 +21,16 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./auth-backend:/code/.env
+      - ./auth-backend:/code
       - ./.env:/code/.env
+    command: ["uvicorn","main:app","--reload","--host","0.0.0.0","--port","8000"]
 
     depends_on:
       - db
+
+    networks:
+      default:
+        ipv4_address: 192.168.100.4
 
   # フロントエンド : frontend
   # frontend:
@@ -43,6 +51,11 @@ services:
     volumes:
       # - ./default.conf:/etc/nginx/conf.d/default.conf
       - ./frontend:/usr/share/nginx/html
+  
+    networks:
+      default:
+        ipv4_address: 192.168.100.6
+
 
 
 
