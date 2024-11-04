@@ -167,3 +167,66 @@ def test_add_temporary_user_info(client):
     assert response.json() == {"Success": "temporary user was stored"}
     ## DBにきちんとデータが作られたか否かを調べる
     assert request_body == {"name": name, "email": email, "password": password}
+
+
+# @pytest.mark.skip(reason="調査のためスキップ")
+def test_auth_temporary_user(client):
+    """テスト作成時では生成されるトークンは固定化している。
+    そのため、本番ではスキップするか、別の方法でtemporary_usersに登録される
+    tokenの固定化を行うこと。
+
+    Args:
+        client (_type_): _description_
+    """
+
+    # セッション情報を登録
+    db = TestingSessionLocal()
+
+    # これから登録するデータが、まだusersテーブルに登録されていないことを確認する.
+    q = text("select name,email,password from users where id = :id")
+    params = {"id": 1}
+
+    try:
+        result = db.execute(q, params)
+        count_of_rows = len(result.fetchall())
+        assert count_of_rows == 0, "Error:そのユーザーはすでに本登録が完了しています。"
+    except SQLAlchemyError as e:
+        print("Error:", e)
+    finally:
+        db.close()
+
+    request_body = {"email": "user@example.com", "token": 999999}
+    response = client.post("/temporary_user/token_auth/", json=request_body)
+
+    # temporary_usersテーブルから当該ユーザー情報が削除されたことを確認する
+    q = text("select name,email,password from temporary_users where id = :id")
+    params = {"id": 1}
+    try:
+        result = db.execute(q, params)
+        count_of_rows = len(result.fetchall())
+        assert (
+            count_of_rows == 0
+        ), "Error:temporary_usersテーブルから情報が適切に削除されていません。"
+    except SQLAlchemyError as e:
+        print("Error:", e)
+    finally:
+        db.close()
+
+    # usersテーブルに情報が登録されたことを確認する
+    q = text("select * from users where email = :email")
+    params = {"id": 3}
+    try:
+        result = db.execute(q, params)
+        count_of_rows = len(result.fetchall())
+        assert (
+            count_of_rows == 1
+        ), "Error:ユーザー情報がusersテーブルに本登録できていません"
+    except SQLAlchemyError as e:
+        print("Error:", e)
+    finally:
+        db.close()
+
+    # ステータスコードのチェック
+    assert response.status_code == 200
+    # レスポンスのボディーのチェック
+    assert response.json() == {"code": "0", "Message": "Success"}
