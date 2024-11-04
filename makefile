@@ -18,6 +18,9 @@ dbinit:
 	sudo chgrp kuro -R data
 	# sudo chmod 775 -R data
 
+show_postgres_container_ip:
+	docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' postgres
+
 init:
 	psql -U postgres -f setup.sql -d postgres -h localhost -p 5432
 
