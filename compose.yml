@@ -34,7 +34,7 @@ services:
   #     - db
   #     - backend
 
-  # フロントエンド
+  # リバースプロキシ
   nginx:
     image: nginx:latest
     container_name: nginx
