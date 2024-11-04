@@ -1,11 +1,44 @@
 'use client';
 
 import { useState } from "react"
+import { useRouter } from "next/navigation";
+
+interface RequestTokenInfo {
+    token: string,
+}
+
+interface ResponseBody {
+    code: string,
+    Message: string,
+}
+
+const postTokenInfo = async (url: string, data: RequestTokenInfo): Promise<ResponseBody> => {
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+        if (!response.ok) {
+            throw new Error("HTTP error! Status: ${response.status}");
+        }
+        const result: ResponseBody = await response.json();
+        return result;
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;
+    }
+};
 
 export default function Home() {
+    const router = useRouter();
     const [formData, setFormData] = useState({
         token: '',
     });
+
+
 
     // フォームの入力欄が変更されたときの処理
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,12 +49,24 @@ export default function Home() {
         }));
     };
 
+
     // フォームの入力欄がSubmitされたときの処理
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         // ここにデータの送信処理を書く
         // START
-        console.log(formData); // データ送信の処理（API経由など）
+        const url = 'http://localhost:8000/temporary_user/token_auth'; // 送信先のエントリポイントを指定
+        const data: RequestTokenInfo = {
+            token: formData.token,
+        };
+        try {
+            const response = await postTokenInfo(url, data);
+            console.log("Success-register:", response);
+            router.push("/success-register");
+        } catch (error) {
+            console.log("Request failed:", error);
+            router.push("/failed-register");
+        }
         // END
     }
 
@@ -45,9 +90,8 @@ export default function Home() {
                             <input
                                 type="text"
                                 name="token"
-                                maxLength={6}
                                 inputMode="numeric"
-                                pattern="[0-9]"
+                                pattern="[0-9]{6}" // 6桁の数値を指定
                                 placeholder="トークン6桁"
                                 value={formData.token}
                                 onChange={handleChange}
