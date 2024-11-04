@@ -1,0 +1,23 @@
+# ベースイメージを指定 (Node.jsのバージョンはプロジェクトに合わせて変更)
+FROM node:20-alpine
+
+# 作業ディレクトリを設定
+WORKDIR /app
+
+# package.jsonとpackage-lock.jsonをコピー
+COPY package.json package-lock.json ./
+
+# 必要なパッケージをインストール
+RUN npm install
+
+# アプリケーションのソースコードをコピー
+COPY . .
+
+# Next.jsアプリをビルド
+RUN npm run build
+
+# ポート3000を公開 (Next.jsのデフォルトポート)
+EXPOSE 3000
+
+# Next.jsアプリを起動
+CMD ["npm", "run", "start"]
