@@ -1,8 +1,40 @@
 'use client';
 
 import { useState } from "react"
+import { useRouter } from "next/navigation";
+
+interface RequestUserInfo {
+  name: string,
+  email: string,
+  password: string,
+};
+
+interface ResponseBody {
+  Success: string,
+}
+
+const postUserInfo = async (url: string, data: RequestUserInfo): Promise<ResponseBody> => {
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    if (!response.ok) {
+      throw new Error("HTTP error! Status: ${response.status}");
+    }
+    const result: ResponseBody = await response.json();
+    return result;
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
+  }
+};
 
 export default function Home() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -18,13 +50,39 @@ export default function Home() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+
+    // ここにpasswordとpassword_confirmの整合チェックを書く
+    if (formData.password != formData.password_confirm) {
+      alert("Passwords do not match.") // 警告メッセージ
+      return; // 以降の処理をスキップ
+    }
+
+
+    const url = 'http://localhost:8000/temporary_user';
     // ここにデータの送信処理を書く
     // START
+    const data: RequestUserInfo = {
+      name: formData.name,
+      email: formData.email,
+      password: formData.password,
+    };
+
+    try {
+      const response = await postUserInfo(url, data);
+      router.push("/input-token");
+      console.log("Success:", response);
+    } catch (error) {
+      console.log("Request failed:", error);
+    };
     console.log(formData); // データ送信の処理（API経由など）
     // END
-  }
+
+    // 画面遷移処理
+
+  };
 
 
   return (
