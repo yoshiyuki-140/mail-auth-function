@@ -3,6 +3,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
 
 from common_function import create_token
+from auth_email.auth_email import send_token_via_email
 
 
 # CREATE
@@ -143,6 +144,8 @@ def create_temporary_user(db: Session, name: str, email: str, password: str):
     try:
         db.execute(q, params)
         db.commit()
+        # メール送信
+        send_token_via_email(token, email)
         return True
     except SQLAlchemyError as e:
         db.rollback()
