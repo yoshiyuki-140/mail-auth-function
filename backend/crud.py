@@ -17,7 +17,7 @@ def create_user(db: Session, name: str, email: str, password: str):
         "password": password,
     }
     try:
-        result = db.execute(q, params)
+        db.execute(q, params)
         db.commit()
         return True
     except SQLAlchemyError as e:
@@ -141,13 +141,13 @@ def create_temporary_user(db: Session, name: str, email: str, password: str):
         "token": token,
     }
     try:
-        result = db.execute(q, params)
+        db.execute(q, params)
         db.commit()
-        return result
+        return True
     except SQLAlchemyError as e:
         db.rollback()
         print("Error occurred:", e)
-        return None
+        return False
 
 
 # トークン情報を認証して一時保存テーブルからユーザー情報保存テーブルに情報を保存する
