@@ -1,4 +1,4 @@
-.PHONY: network_clean dbinit init login dbattach up down
+.PHONY: up down network_clean dbinit init login login-test-db dbattach backendattach 
 
 up:
 	docker compose up -d
