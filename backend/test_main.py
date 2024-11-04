@@ -142,9 +142,14 @@ def test_add_temporary_user_info(client):
 
     # DBからデータを取得
     db = TestingSessionLocal()
-    user_id = 1
-    q = text("select name,email,password from temporary_users where id = :id")
-    params = {"id": user_id}
+    q = text(
+        "select name,email,password from temporary_users where name = :name and email = :email and password = :password"
+    )
+    params = {
+        "name": request_body["name"],
+        "email": request_body["email"],
+        "password": request_body["password"],
+    }
     try:
         result = db.execute(q, params)
         row = result.fetchone()
