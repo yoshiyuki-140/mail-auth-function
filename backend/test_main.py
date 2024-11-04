@@ -194,6 +194,7 @@ def test_auth_temporary_user(client):
     finally:
         db.close()
 
+    # 当該エントリポイントにリクエスト実行
     request_body = {"email": "user@example.com", "token": 999999}
     response = client.post("/temporary_user/token_auth/", json=request_body)
 
