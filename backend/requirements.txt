@@ -11,6 +11,7 @@ python-dotenv
 # poregresql library
 psycopg2-binary
 # formatter
+autoflake
 isort
 black
 # テスト用
