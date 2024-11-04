@@ -2,8 +2,8 @@ from sqlalchemy import text
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
 
-from common_function import create_token
 from auth_email.auth_email import send_token_via_email
+from common_function import create_token
 
 
 # CREATE
