@@ -142,7 +142,7 @@ def test_add_temporary_user_info(client):
 
     # DBからデータを取得
     db = TestingSessionLocal()
-    # リクエストボディーで申請したものがきちんと作られているのかを判定する
+    # リクエストボディーで申請したものがきちんとDBに作られているのかを判定する
     q = text(
         "select name,email,password from temporary_users where name = :name and email = :email and password = :password"
     )
