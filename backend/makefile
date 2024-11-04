@@ -26,4 +26,4 @@ f:
 	black .
 
 test:
-	pytest
+	pytest --timeout=10
