@@ -29,5 +29,5 @@ SMTP_PASS="password" # メールアドレスのパスワード
 make up # docker compose up -d
 ```
 
-1. localhost:8000にアクセス
+1. localhost:3000にアクセス
 
