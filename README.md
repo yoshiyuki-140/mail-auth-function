@@ -3,7 +3,7 @@
 
 # 環境構築
 
-動かすときは、プロジェクトルートに以下の形式の`.env`ファイルを設置すること。
+1. プロジェクトルートに以下の形式の`.env`ファイルを設置
 ```bash
 # ./.env
 # DB用のデータ
@@ -24,8 +24,10 @@ FROM_EMAIL="username@username.sakura.ne.jp" # 送信元
 SMTP_PASS="password" # メールアドレスのパスワード
 ```
 
+1. 以下を実行
 ```bash
 make up # docker compose up -d
 ```
-localhost:8000にアクセス
+
+1. localhost:8000にアクセス
 
