@@ -3,8 +3,9 @@
 
 動かすときは、プロジェクトルートに以下の形式の`.env`ファイルを設置すること。
 ```bash
+# ./.env
 # DB用のデータ
-POSTGRES_USER="username"
+POSTGRES_USER="db_username"
 POSTGRES_PASSWORD="db_password"
 POSTGRES_DB="db_name"
 POSTGRES_DEV_DB="db_name" # 開発環境のDBの名前
