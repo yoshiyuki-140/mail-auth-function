@@ -1,6 +1,8 @@
 # mail-auth-function
 メール認証機能を他のサービスと組み合わせて使うために一度アセットとして作ってみる。
 
+# 環境構築
+
 動かすときは、プロジェクトルートに以下の形式の`.env`ファイルを設置すること。
 ```bash
 # ./.env
@@ -21,3 +23,9 @@ SMTP_USER="username@username.sakura.ne.jp"  # 送信元のメールアドレス
 FROM_EMAIL="username@username.sakura.ne.jp" # 送信元
 SMTP_PASS="password" # メールアドレスのパスワード
 ```
+
+```bash
+make up # docker compose up -d
+```
+localhost:8000にアクセス
+
