@@ -40,10 +40,10 @@ services:
       - "3000:3000"
     depends_on:
       - db
-      - auth-backend
+      - backend
     
     networks:
-      - default:
+      default:
         ipv4_address: 192.168.100.5
 
   # リバースプロキシ

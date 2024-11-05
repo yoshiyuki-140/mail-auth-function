@@ -65,7 +65,8 @@ export default function Home() {
         e.preventDefault()
         // ここにデータの送信処理を書く
         // START
-        const url = 'http://localhost:8000/temporary_user/token_auth'; // 送信先のエントリポイントを指定
+        // const url = 'http://localhost:8000/temporary_user/token_auth'; 
+        const url = `http://${process.env.NEXT_PUBLIC_API_IP}:8000/temporary_user/token_auth`;// 送信先のエントリポイントを指定
         const data: RequestTokenInfo = {
             email: email,
             token: formData.token,

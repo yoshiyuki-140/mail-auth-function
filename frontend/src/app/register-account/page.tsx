@@ -61,7 +61,7 @@ export default function Home() {
     }
 
 
-    const url = 'http://localhost:8000/temporary_user';
+    const url = `http://${process.env.NEXT_PUBLIC_API_IP}:8000/temporary_user`;
     // ここにデータの送信処理を書く
     // START
     const data: RequestUserInfo = {
