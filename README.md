@@ -23,7 +23,7 @@ SMTP_USER="username@username.sakura.ne.jp"  # 送信元のメールアドレス
 FROM_EMAIL="username@username.sakura.ne.jp" # 送信元
 SMTP_PASS="password" # メールアドレスのパスワード
 ```
-
+1. `make init`を実行 -> DBにテーブルを作成
 1. 以下を実行
 ```bash
 make up # docker compose up -d
